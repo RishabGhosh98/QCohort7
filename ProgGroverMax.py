@@ -1,6 +1,8 @@
 #Problem statement You have two integers return the largest.Using grovers search
 # Assumptions :- Only numbers belonging to the set of integers.
 
+#Problem statement You have two integers return the largest.Using grovers search
+
 from qiskit import QuantumCircuit, execute, Aer
 import math
 
@@ -43,7 +45,7 @@ def find_the_largest_number(number1,number2) -> int:
             qc.h(i)
             qc.x(i)
         qc.h(n-1)
-        #qc.mct(list(range(n-1)), n-1)
+        qc.mcx(list(range(n-1)), n-1)
         qc.h(n-1)
         for i in range(n):
             qc.x(i)
@@ -62,16 +64,10 @@ def find_the_largest_number(number1,number2) -> int:
     counts = result.get_counts()
     print(qc)
     if '1' in counts:
-        if number1>0:
-            return number1
-        else :
-            return number2
+        return number2
     else:
-        if number2>0:
-            return number2
-        else :
-            return number1
-
+        return number1
+    
 #calling the function
 x=find_the_largest_number(-291,13)
 print(x)
